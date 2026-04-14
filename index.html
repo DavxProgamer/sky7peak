@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>OLD PEAK</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<canvas id="webCanvas"></canvas>
+
+    <div id="popup" class="popup">
+  <div class="popup-box">
+    <h2>Aviso</h2>
+    <p>Se você veio pelo TikTok, abra o site pelo navegador.</p>
+    <button onclick="fecharPopup()">OK</button>
+  </div>
+</div>
+    
+<!-- TOPO -->
+<header class="top-bar">
+
+    <div class="menu-btn" onclick="toggleMenu()" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <h1 class="logo">OLD <span>PEAK</span></h1>
+
+    <a href="https://discord.gg/SnpPDqVNsy" target="_blank" class="discord-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.249.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.369a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.055 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.873-1.295 1.226-1.99a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.9.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.128 12.299 12.299 0 01-1.873.9.076.076 0 00-.04.107c.36.695.772 1.36 1.225 1.99a.076.076 0 00.084.028 19.863 19.863 0 006.002-3.03.077.077 0 00.03-.055c.5-5.177-.838-9.674-3.549-13.661a.062.062 0 00-.031-.028z"/>
+    </svg>
+</a>
+    
+</header>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleDropdown(this)">
+            CRIADOR <span class="arrow">›</span>
+        </div>
+        <div class="menu-content">
+            <p>Dono - @sky7corpse</p>
+            <p>SubDono - @hurt66x</p>
+            <p>Developer - @davx1nsane</p>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleDropdown(this)">
+            SOBRE <span class="arrow">›</span>
+        </div>
+        <div class="menu-content">
+            <p>
+            Bem-vindo ao OLD PEAK, mapa feito para clipadores trazendo a peak antiga e nostálgica.
+            </p>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleDropdown(this)">
+            ATUALIZAÇÕES <span class="arrow">›</span>
+        </div>
+        <div class="menu-content">
+    
+<p>
+Loja<br>
+Bypass<br>
+Skins<br>
+</p>
+
+<p>
+Teleporte<br>
+Conjuntos<br>
+Verificados<br>
+</p>
+
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleDropdown(this)">
+            VIP <span class="arrow">›</span>
+        </div>
+        <div class="menu-content">
+            <p>
+VIP Mestre<br>
+VIP Diamante<br>
+VIP Bronze<br>
+VIP free
+</p>
+        </div>
+            
+    </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <h2>Bem-vindo ao <span>OLD PEAK</span></h2>
+
+    <p class="desc">
+        O <span>OLD PEAK</span> é o mapa perfeito para <span>X1</span> e 
+        criação de <span>Clips Insanos</span>.  
+        Tenha acesso a vantagens como <span>Full HS</span>, 
+        <span>No Recoil</span> e <span>Teleporte</span>.
+    </p>
+
+</section>
+
+<!-- PLANOS -->
+<section class="plans">
+
+    <h2>PLANOS VIP</h2>
+
+    <div class="plans-list">
+
+        <div class="plan-card">
+            <h3>VIP DIMA</h3>
+
+            <ul>
+                <li>Full HS</li>
+                <li>Velocidade 5X</li>
+                <li>Pulo 5X</li>
+                <li>No Recoil</li>
+            </ul>
+
+            <span class="price">PIX</span>
+            <span class="pay">Conferir Valores</span>
+
+            <button onclick="comprarWhats('VIP DIMA')" class="btn-buy">
+                Detalhes
+            </button>
+        </div>
+
+        <div class="plan-card destaque">
+            <h3>VIP MESTRE</h3>
+
+            <ul>
+                <li>Full HS</li>
+                <li>Back Jump</li>
+                <li>Spinner</li>
+                <li>No Recoil</li>
+            </ul>
+
+            <span class="price">PIX</span>
+            <span class="pay">Conferir Valores</span>
+
+            <button onclick="comprarWhats('VIP MESTRE')" class="btn-buy pulse">
+                Detalhes
+            </button>
+        </div>
+        
+        <div class="plan-card">
+            <h3>VIP BRONZE</h3>
+
+            <ul>
+                <li>Full HS</li>
+                <li>Velocidade 5X</li>
+                <li>Pulo 5X</li>
+                <h3>ㅤ</h3>
+            </ul>
+
+            <span class="price">PIX</span>
+            <span class="pay">Conferir Valores</span>
+
+            <button onclick="comprarWhats('VIP BRONZE')" class="btn-buy">
+                Detalhes
+            </button>
+        </div>
+        
+        <div class="plan-card">
+            <h3>VIP FREE</h3>
+
+            <ul>
+                <p>ㅤ</p>
+                <p>ㅤ</p>
+                <p>ㅤ</p>
+                <p>ㅤ</p>
+            </ul>
+
+            <span class="price">ㅤ</span>
+            <span class="pay">ㅤ</span>
+
+            <button onclick="comprarWhats('VIP FREE')" class="btn-buy">
+                INDISPONIVEL
+            </button>
+        </div>
+        
+    </div>
+
+    <div class="aviso">
+    Após a compra, chame os dois <span>ADMs</span> no WhatsApp pelo botão no canto inferior direito para retirar sua <span>key</span>, Entregamos no prazo de até <span>24 Horas</span>, Normalmente <span>entregamos</span> muito antes.
+    </div>
+       
+</section>
+    
+    
+    <!-- BOTÃO WHATSAPP -->
+<div class="wpp-container">
+
+    <div class="wpp-options" id="wppOptions">
+        <a href="https://wa.me/55447494680998" target="_blank" class="wpp-option">
+            Sky
+        </a>
+
+        <a href="https://wa.me/5543996647713" target="_blank" class="wpp-option">
+            Dav
+        </a>
+    </div>
+
+    <div class="wpp-btn" onclick="toggleWpp()">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+    </div>
+
+</div>
+
+    <!-- MODAL ESCOLHER DIAS -->
+<div class="modal" id="modalDias">
+
+    <div class="modal-box">
+
+        <h3>Quanto dias você quer?</h3>
+
+        <div class="dias-opcoes">
+            <button onclick="irCheckout('vip7')">7 Dias</button>
+            <button onclick="irCheckout('vip15')">15 Dias</button>
+        </div>
+
+        <span class="fechar" onclick="fecharModal()">✕</span>
+
+    </div>
+
+</div>
+    
+<script src="script.js"></script>
+</body>
+</html>

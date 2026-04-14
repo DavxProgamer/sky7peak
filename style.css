@@ -1,0 +1,693 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: #000;
+    color: #fff;
+}
+
+#webCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #0d0d0d;
+}
+
+/* ================= TOPO ================= */
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px 20px;
+    z-index: 2000;
+
+    /* 🔥 NOVO */
+    background: rgba(0,0,0,0.4); /* transparente */
+    backdrop-filter: blur(10px); /* DESFOQUE */
+    -webkit-backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.2); /* linha branca suave */
+}
+
+/* LOGO */
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: red;
+    text-shadow: 0 0 10px red;
+}
+
+/* ================= MENU BTN ================= */
+
+.menu-btn {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    background: rgba(0,0,0,0.9);
+
+    border: 1px solid rgba(255,0,0,0.4);
+    box-shadow: 0 0 15px rgba(255,0,0,0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-btn span {
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    transition: 0.3s;
+}
+
+.menu-btn span:nth-child(1){ transform: translateY(-7px); }
+.menu-btn span:nth-child(2){ transform: translateY(0); }
+.menu-btn span:nth-child(3){ transform: translateY(7px); }
+
+.menu-btn.active span:nth-child(1){ transform: rotate(45deg); }
+.menu-btn.active span:nth-child(2){ opacity: 0; }
+.menu-btn.active span:nth-child(3){ transform: rotate(-45deg); }
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    position: fixed;
+    left: -270px;
+    top: 0;
+
+    width: 270px;
+    height: 100%;
+
+    background: #080808;
+    padding: 90px 20px 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    transition: 0.4s;
+    z-index: 1500;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+/* ================= MENU ITEM ================= */
+
+.menu-item {
+    background: linear-gradient(145deg, #0a0a0a, #111);
+    border-radius: 16px;
+    border: 1px solid rgba(255,0,0,0.2);
+
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.menu-item:hover {
+    border-color: rgba(255,0,0,0.5);
+    box-shadow: 0 0 15px rgba(255,0,0,0.2);
+}
+
+.menu-header {
+    padding: 16px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.arrow {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    transition: 0.3s;
+}
+
+.menu-item.active {
+    border-color: red;
+    box-shadow: 0 0 20px rgba(255,0,0,0.25);
+}
+
+.menu-content {
+    max-height: 0;
+    overflow: hidden;
+
+    padding: 0 18px;
+
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: 0.85;
+
+    transition: all 0.3s ease;
+}
+
+.menu-item.active .menu-content {
+    max-height: 1000px;
+    padding: 15px 18px;
+}
+
+.menu-item.active .arrow {
+    transform: rotate(90deg);
+    color: red;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    padding-top: 200px;
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+}
+
+.hero h2 {
+    font-size: 28px;
+}
+
+.hero h2 span {
+    color: red;
+}
+
+.desc {
+    margin-top: 15px;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.desc span {
+    color: red;
+    font-weight: 600;
+}
+
+/* ================= PLANOS ================= */
+
+.plans {
+    width: 100%;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.plans-list {
+    display: grid !important;
+
+    grid-template-columns: 1fr 1fr !important; /* FORÇA 2 colunas */
+
+    max-width: 500px;
+    margin: 60px auto;
+
+    gap: 20px;
+}
+
+/* CARD BASE */
+.plan-card {
+    width: 100%;
+    max-width: 180px;
+
+    padding: 20px;
+    margin: 0 auto; /* CORRIGIDO */
+
+    background: linear-gradient(145deg, #0a0a0a, #111);
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,0,0,0.15);
+
+    position: relative;
+    overflow: hidden;
+
+    transition: 0.4s ease;
+}
+
+.plan-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 2px;
+
+    background: linear-gradient(90deg, transparent, red, transparent);
+    transition: 0.5s;
+}
+
+.plan-card:hover::before {
+    left: 100%;
+}
+
+.plan-card:hover {
+    transform: translateY(-10x) scale(1.02);
+    border-color: red;
+    box-shadow: 0 0 30px rgba(255,0,0,0.2);
+}
+
+.plan-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.plan-card ul {
+    list-style: none;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.plan-card ul li {
+    margin: 6px 0;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.plan-card ul li::before {
+    content: "✔";
+    color: red;
+    margin-right: 6px;
+}
+
+.price {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    color: #8affc1;
+    text-shadow: 0 0 15px rgba(138,255,193,0.6);
+    margin-top: 10px;
+}
+
+.pay {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+}
+
+.btn-buy {
+    margin-top: 18px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #ff0000, #990000);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-buy:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px red;
+}
+
+.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px red; }
+    50% { box-shadow: 0 0 25px red; }
+    100% { box-shadow: 0 0 10px red; }
+}
+
+.plan-card.destaque {
+    border: 1px solid red;
+    box-shadow: 0 0 25px rgba(255,0,0,0.3);
+}
+
+.plan-card.destaque::after {
+    content: "MAIS VENDIDO";
+    position: absolute;
+    top: 12px;
+    right: -40px;
+    background: red;
+    color: #fff;
+    font-size: 5px;
+    padding: 3px 25px;
+    transform: rotate(45deg);
+}
+
+@media (max-width: 600px) {
+    .plans-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, a, div {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* BOTÃO WHATSAPP */
+.wpp-container {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    z-index: 3000;
+}
+
+/* BOTÃO PRINCIPAL */
+.wpp-btn {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    background: linear-gradient(145deg, #25D366, #128C7E);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(37,211,102,0.6);
+
+    transition: 0.3s;
+}
+
+.wpp-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ÍCONE */
+.wpp-btn img {
+    width: 30px;
+}
+
+/* OPÇÕES */
+.wpp-options {
+    position: absolute;
+    right: 70px; /* joga pro lado esquerdo do botão */
+
+    display: flex;
+    flex-direction: row; /* horizontal */
+    gap: 10px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translateX(20px);
+    transition: 0.3s;
+}
+
+/* ATIVO */
+.wpp-options.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+/* BOTÕES INTERNOS */
+.wpp-option {
+    background: #111;
+    color: #fff;
+
+    padding: 10px 15px;
+    border-radius: 20px;
+
+    text-decoration: none;
+    font-size: 14px;
+
+    border: 1px solid rgba(37,211,102,0.4);
+
+    transition: 0.3s;
+}
+
+.wpp-option:hover {
+    background: #25D366;
+    color: #000;
+}
+
+.aviso {
+    margin-top: 40px;
+    padding: 15px 20px;
+
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background: rgba(255,0,0,0.05);
+    border: 1px solid rgba(255,0,0,0.2);
+    border-radius: 12px;
+
+    font-size: 13px;
+    text-align: center;
+
+    color: rgba(255,255,255,0.7);
+
+    backdrop-filter: blur(5px);
+}
+
+.aviso span {
+    color: red;
+    font-weight: 600;
+}
+
+/* ================= MODAL GLASS ================= */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.3s ease;
+    z-index: 5000;
+}
+
+/* ATIVO */
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* CAIXA */
+.modal-box {
+    background: rgba(20,20,20,0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 20px;
+    padding: 30px 25px;
+
+    border: 1px solid rgba(255,0,0,0.2);
+
+    box-shadow:
+        0 0 40px rgba(255,0,0,0.2),
+        inset 0 0 20px rgba(255,255,255,0.03);
+
+    text-align: center;
+    position: relative;
+
+    transform: scale(0.8) translateY(40px);
+    opacity: 0;
+
+    transition: 0.4s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ANIMAÇÃO ENTRADA */
+.modal.active .modal-box {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* TÍTULO */
+.modal-box h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* BOTÕES */
+.dias-opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* BOTÕES GLASS */
+.dias-opcoes button {
+    padding: 12px;
+
+    border-radius: 25px;
+    border: 1px solid rgba(255,0,0,0.3);
+
+    background: rgba(255,0,0,0.08);
+    color: #fff;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* HOVER BONITO */
+.dias-opcoes button:hover {
+    background: red;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px red;
+}
+
+/* BOTÃO FECHAR */
+.fechar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.fechar:hover {
+    opacity: 1;
+    color: red;
+}
+
+.discord-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    background: #5865F2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
+    transition: 0.25s ease;
+    z-index: 9999;
+    text-decoration: none;
+}
+
+.discord-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(88, 101, 242, 0.9);
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.75);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-box {
+  background: linear-gradient(145deg, #111, #1a1a1a);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+
+  border-radius: 15px;
+  padding: 25px;
+  width: 90%;
+  max-width: 320px;
+
+  text-align: center;
+
+  box-shadow: 
+    0 0 20px rgba(255, 0, 0, 0.4),
+    0 0 40px rgba(255, 0, 0, 0.2);
+
+  animation: popIn 0.3s ease;
+}
+
+.popup-box h2 {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.popup-box p {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.popup-box button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(90deg, #ff0000, #cc0000);
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.popup-box button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px red;
+}
+
+/* animações */
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
